@@ -1,4 +1,9 @@
 raw_data/
 .env
+<<<<<<< HEAD
 get_images_roboflow.ipynb
 runs
+=======
+runs/
+EpicureAi-6/
+>>>>>>> 73ed7807d5afb32851e3b1de96265b3d618cb33d
