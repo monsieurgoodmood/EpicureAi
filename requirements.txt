@@ -1,7 +1,3 @@
 openAI
 ultralytics
-<<<<<<< HEAD
-# add more here
-=======
 comet_ml
->>>>>>> 73ed7807d5afb32851e3b1de96265b3d618cb33d

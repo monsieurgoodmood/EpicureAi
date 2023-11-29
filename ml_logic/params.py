@@ -1,3 +1,0 @@
-NUM_EPOCHS = 5
-DEVICE = "cpu"
-IMGSZ = 512
