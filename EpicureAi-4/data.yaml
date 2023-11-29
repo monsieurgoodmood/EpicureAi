@@ -23,5 +23,5 @@ roboflow:
   version: 4
   workspace: wagon
 test: ../test/images
-train: EpicureAi-4/train/images
-val: EpicureAi-4/valid/images
+train: /Users/joaqo/code/joaquin-ortega84/projects/EpicureAi/EpicureAi-4/train/images
+val: /Users/joaqo/code/joaquin-ortega84/projects/EpicureAi/EpicureAi-4/valid/images
