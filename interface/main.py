@@ -6,9 +6,10 @@ from params import *
 
 def main():
     # load_data_from_roboflow()
-    augmentation_training_set()
-    augmentation_validation_set()
-    # train_model(epochs=NUM_EPOCHS)
+    # Need to update the paths to our data in data.yaml
+    # augmentation_training_set()
+    # augmentation_validation_set()
+    train_model(epochs=NUM_EPOCHS)
 
 if __name__ == "__main__":
     main()
