@@ -39,10 +39,10 @@ def generate_recipe(ingredients, diet, allergies, intolerances, time_available, 
     total_tokens = min(base_tokens + additional_tokens_per_ingredient * len(ingredients), max_tokens)
 
     # Appel à l'API OpenAI
-    response = openai.Completion.create(
-        engine="davinci",
-        prompt=prompt,
-        max_tokens=total_tokens
-    )
+    response = openai.chat.completions.create(
+#        model="gpt-3.5-turbo",
+#       messages=[{"role": "system", "content": "You are recipe assisstant that gives out recipes to the ingredients the user gives you "},
+#               {"role": "user", "content": " ,".join(ingredients_list)}]
+#    )
 
     return response.choices[0].text.strip()

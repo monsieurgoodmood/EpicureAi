@@ -27,3 +27,39 @@ if uploaded_file is not None:
         st.image(response.content, caption="Processed Image", use_column_width=True)
     else:
         st.write("Failed to process image")
+
+
+diets = [
+    "",  # Option pour aucun régime spécifique
+    "Vegetarian",
+    "Vegan",
+    "Pescatarian",
+    "Gluten-Free",
+    "Ketogenic",
+    "Paleo",
+    "Low-Carb",
+    "Mediterranean",
+    "Whole30",
+    "DASH",
+    "Low-FODMAP",
+    "Flexitarian",
+    "High-Protein"
+]
+
+# oneselect optionnal box
+selected_diet = st.selectbox("Choose your diet", diets)
+
+
+allergen_options = ["nuts", "dairy", "seafood"]
+intolerance_options = ["lactose", "gluten", "soy"]
+equipment_options = ["oven", "blender", "microwave"]
+
+selected_allergies = st.multiselect("Select allergies", allergen_options)
+selected_intolerances = st.multiselect("Select intolerances", intolerance_options)
+selected_equipment = st.multiselect("Select kitchen equipment", equipment_options)
+
+# Les variables selected_allergies, selected_intolerances et selected_equipment
+# contiendront les choix de l'utilisateur sous forme de listes.
+
+
+# Et ainsi de suite pour les autres paramètres...
