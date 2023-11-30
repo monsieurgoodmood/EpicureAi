@@ -1,7 +1,7 @@
 import os
 
 # Model training
-NUM_EPOCHS = 2
+NUM_EPOCHS = 10
 DEVICE = "cpu"
 IMGSZ = 512
 

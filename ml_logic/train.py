@@ -16,6 +16,7 @@ def train_model(epochs: int = 10, img_size: int = 512, verbose=True):
 
     # Load the pre-trained model
     model = YOLO("yolov8n.pt")
+
     # Train the model
     model.train(
         data=yaml_path,
