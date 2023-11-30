@@ -1,9 +1,13 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.responses import JSONResponse
 from starlette.middleware.cors import CORSMiddleware
 import cv2
 import numpy as np
-from io import BytesIO
+from typing import Optional
+import os
+
+# Importer les fonctions depuis recipes_chatgpt
+from recipes_chatgpt import generate_recipe, mock_yolo_model
 
 app = FastAPI()
 
@@ -17,18 +21,34 @@ app.add_middleware(
 )
 
 @app.post("/upload_image")
-async def upload_image(file: UploadFile = File(...)):
-    contents = await file.read()
-    nparr = np.frombuffer(contents, np.uint8)
-    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+async def upload_image(
+    file: UploadFile = File(...),
+    diet: Optional[str] = Form(None),
+    allergies: str = Form(""),
+    intolerances: str = Form(""),
+    time_available: Optional[int] = Form(None),
+    kitchen_equipment: str = Form("")
+):
+    try:
+        contents = await file.read()
+        nparr = np.frombuffer(contents, np.uint8)
+        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        if img is None:
+            raise ValueError("Le fichier envoyé n'est pas une image valide ou n'a pas pu être décodée.")
 
-    # Ici, vous appellerez votre vrai modèle YOLO. Pour l'instant, nous utilisons une simulation
-    ingredients = mock_yolo_model(img)
+        allergies_list = allergies.split(",") if allergies else []
+        intolerances_list = intolerances.split(",") if intolerances else []
+        kitchen_equipment_list = kitchen_equipment.split(",") if kitchen_equipment else []
 
-    # Retourner les ingrédients simulés
-    return JSONResponse(content={"ingredients": ingredients})
+        ingredients = mock_yolo_model(img)  # Simuler la détection d'ingrédients
+        recipe = generate_recipe(ingredients, diet, allergies_list, intolerances_list, time_available, kitchen_equipment_list)
 
-def mock_yolo_model(image):
-    # Cette fonction est juste un bouchon pour simuler la sortie de votre modèle YOLO
-    # Elle retourne une liste d'ingrédients fictifs
-    return ["ingrédient1", "ingrédient2", "ingrédient3"]
+        return JSONResponse(content={"ingredients": ingredients, "recipe": recipe})
+
+    except Exception as e:
+        print(f"Erreur lors du traitement de la requête: {e}")
+        return JSONResponse(content={"error": str(e)}, status_code=500)
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
