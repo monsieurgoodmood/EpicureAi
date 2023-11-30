@@ -27,6 +27,10 @@ def train_model(epochs: int = 10, img_size: int = 512, verbose=True):
         name="yolov8_custom",
         verbose=verbose
     )
-
     # Export the model to ONNX format
     path = model.export()
+    print('✅ finished with training and exported the model' )
+
+
+if __name__ == "__main__":
+    train_model()
