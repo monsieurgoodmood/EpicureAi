@@ -12,7 +12,7 @@ st.write("Revolutionize your culinary experience with AI")
 st.markdown("<br>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
 
-st.subheader('Select your dietary requirements...')
+st.subheader('Select your dietary requirements')
 # Select dietary needs
 selected_diet = st.selectbox("Choose your diet", DIETS)
 allergen_options = ["nuts", "dairy", "seafood"]

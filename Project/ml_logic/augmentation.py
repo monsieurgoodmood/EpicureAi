@@ -138,17 +138,14 @@ def process_images_annotations(images_directory, annotations_directory, new_base
                 new_images_count += 1
 
 # Dossiers pour le dataset original
-base_directory = BASE_DIRECTORY
-
-train_images_directory = os.path.join(base_directory, "train/images")
-train_annotations_directory = os.path.join(base_directory, "train/labels")
-validation_images_directory = os.path.join(base_directory, "valid/images")
-validation_annotations_directory = os.path.join(base_directory, "valid/labels")
+train_images_directory = os.path.join(BASE_IMAGES_DIR, "train/images")
+train_annotations_directory = os.path.join(BASE_IMAGES_DIR, "train/labels")
+validation_images_directory = os.path.join(BASE_IMAGES_DIR, "valid/images")
+validation_annotations_directory = os.path.join(BASE_IMAGES_DIR, "valid/labels")
 
 # Chemins pour le nouveau dataset
-new_dataset_directory = "raw_data/new_dataset"
-new_train_directory = os.path.join(new_dataset_directory, "train")
-new_valid_directory = os.path.join(new_dataset_directory, "valid")
+new_train_directory = os.path.join(AUGMENTED_IMAGES_DIR, "train")
+new_valid_directory = os.path.join(AUGMENTED_IMAGES_DIR, "valid")
 
 # Nombre d'images dans les ensembles d'entraînement et de validation (à mettre à jour)
 num_train_images = 125  # Mettre à jour avec le nombre réel d'images d'entraînement
@@ -166,9 +163,9 @@ transformations_dict = {
 
 def augmentation_training_set():
     # Appliquer les transformations sur l'ensemble d'entraînement
-    return process_images_annotations(train_images_directory, train_annotations_directory, new_dataset_directory, transformations_dict, "train")
+    return process_images_annotations(train_images_directory, train_annotations_directory, AUGMENTED_IMAGES_DIR, transformations_dict, "train")
 
 def augmentation_validation_set():
     # Ajuster les transformations pour l'ensemble de validation si nécessaire
     transformations_dict['flip'] += transformations_per_image % 3
-    return process_images_annotations(validation_images_directory, validation_annotations_directory, new_dataset_directory, transformations_dict, "valid")
+    return process_images_annotations(validation_images_directory, validation_annotations_directory, AUGMENTED_IMAGES_DIR, transformations_dict, "valid")
