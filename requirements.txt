@@ -1,3 +1,9 @@
 openai
 ultralytics
 comet_ml
+fastapi
+uvicorn
+python-multipart
+numpy
+opencv-python-headless
+openai
