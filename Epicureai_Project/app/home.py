@@ -11,7 +11,7 @@ st.write("Revolutionize your culinary experience with AI")
 uploaded_image = st.file_uploader("Choose an image...", type="jpg")
 
 # Detect image with yolov8
-def detect_image(uploaded_image):
+def detect_ingredients(uploaded_image):
     # Add yolov8 logic detection
-    detected_objects = ["potato", "egg", "milk"]
-    return detected_objects
+    ingredients_list = ["potato", "egg", "milk"]
+    return ingredients_list
