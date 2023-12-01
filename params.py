@@ -5,7 +5,6 @@ NUM_EPOCHS = 10
 DEVICE = "cpu"
 IMGSZ = 512
 
-
 # Comet ML
 WEIGHTS = os.path.join(os.getcwd(),'comet_ml')
 
@@ -16,3 +15,4 @@ YAML_PATH = os.path.join(BASE_DIRECTORY,'data.yaml')
 # API Key
 ROBOFLOW_APIKEY = os.environ.get("ROBOFLOW_APIKEY")
 COMETML_APIKEY = os.environ.get("COMETML_APIKEY")
+OPENAI_KEY = os.environ.get("OPENAI_KEY")

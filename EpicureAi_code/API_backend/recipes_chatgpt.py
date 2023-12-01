@@ -1,5 +1,5 @@
-
 import openai
+from params import *
 
 #def recipe_gpt(ingredients_list: list)-> str:
 #   client = OpenAI()
@@ -15,7 +15,7 @@ def mock_yolo_model(image):
     return ["spaghetti", "oats", "courgette"]
 
 def generate_recipe(ingredients, diet, allergies, intolerances, time_available, kitchen_equipment):
-    openai.api_key = "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"
+    openai.api_key = OPENAI_KEY
 
     # Construire le prompt avec les informations de l'utilisateur
     prompt = f"Create a detailed recipe using these ingredients: {', '.join(ingredients)}"
