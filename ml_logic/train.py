@@ -23,7 +23,6 @@ def train_model(epochs: int = 10, img_size: int = 512, verbose=True):
         epochs=NUM_EPOCHS,
         imgsz=img_size,
         save=True,
-        device=DEVICE,
         name="yolov8_custom",
         verbose=verbose
     )
