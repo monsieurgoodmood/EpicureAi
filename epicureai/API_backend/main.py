@@ -44,6 +44,7 @@ async def upload_image(
         ingredients = mock_yolo_model(img)
         recipe = generate_recipe(ingredients, diet, allergies_list, intolerances_list, time_available_in_minutes, kitchen_equipment_list)
         print("Recipe from generate_recipe:", recipe)  # Débogage
+
         return JSONResponse(content={"ingredients": ingredients, "recipe": recipe})
 
     except Exception as e:

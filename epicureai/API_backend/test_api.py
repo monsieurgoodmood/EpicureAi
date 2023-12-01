@@ -2,6 +2,7 @@ import requests
 import random
 from pathlib import Path
 import json
+from recipes_chatgpt import generate_recipe, mock_yolo_model  # Ajout de l'importation
 
 url = "http://localhost:8000/upload_image"
 # Chemin vers l'image
@@ -36,17 +37,26 @@ for i, intolerance in enumerate(intolerances):
 for i, equipment in enumerate(kitchen_equipment):
     multipart_form_data[f"kitchen_equipment[{i}]"] = (None, equipment)
 
-# Envoi de la requête POST
 response = requests.post(url, files=multipart_form_data)
 
-# Afficher le code de statut et le texte de la réponse
 print("Status Code:", response.status_code)
 print("Response Text:", response.text)
 
-# Tentative de décodage JSON seulement si la réponse est 200 OK
 if response.status_code == 200:
     try:
-        print("JSON Response:", response.json())
+        response_json = response.json()
+        print("JSON Response:", response_json)
+
+        if 'recipe' in response_json and response_json['recipe'] != "Sorry, I couldn't generate a recipe.":
+            print("Generated Recipe:", response_json['recipe'])
+        else:
+            print("No valid recipe found in the response.")
+
+        # Tester directement la fonction generate_recipe
+        ingredients = mock_yolo_model(None)  # Adaptez cette partie selon votre logique réelle de détection d'ingrédients
+        direct_recipe = generate_recipe(ingredients, diet, allergies, intolerances, time_available, kitchen_equipment)
+        print("Direct Recipe Result:", direct_recipe)
+
     except json.decoder.JSONDecodeError:
         print("Erreur de décodage JSON.")
 else:
