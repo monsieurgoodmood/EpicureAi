@@ -1,7 +1,7 @@
 import comet_ml
 from ultralytics import YOLO
 import os
-from params import *
+from Project.params import *
 import yaml
 
 COMETML_APIKEY="7rjl1Zsakp1QfmEObqF7Df9Hr"

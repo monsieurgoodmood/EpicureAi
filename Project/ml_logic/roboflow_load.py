@@ -1,5 +1,5 @@
 from roboflow import Roboflow
-from params import *
+from Project.params import *
 
 
 def load_data_from_roboflow():
