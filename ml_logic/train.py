@@ -4,6 +4,7 @@ import os
 from params import *
 import yaml
 
+COMETML_APIKEY="7rjl1Zsakp1QfmEObqF7Df9Hr"
 experiment = comet_ml.Experiment(
     api_key=COMETML_APIKEY,
     project_name="epicureai"
@@ -15,15 +16,18 @@ def train_model(epochs: int = 10, img_size: int = 512, verbose=True):
     yaml_path = os.path.join(BASE_DIRECTORY, "data.yaml")
 
     # Load the pre-trained model
+<<<<<<< HEAD
     model = YOLO("yolov8n.pt")
 
+=======
+    model = YOLO('yolov8n.yaml').load('yolov8n.pt')
+>>>>>>> dc72aa5c011ce0186812a99cc18e247d34217a41
     # Train the model
     model.train(
         data=yaml_path,
         epochs=NUM_EPOCHS,
         imgsz=img_size,
         save=True,
-        device=DEVICE,
         name="yolov8_custom",
         verbose=verbose
     )

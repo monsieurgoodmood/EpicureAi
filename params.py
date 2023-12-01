@@ -2,7 +2,11 @@ import os
 
 # Model training
 NUM_EPOCHS = 10
+<<<<<<< HEAD
 DEVICE = "cpu"
+=======
+DEVICE = "gpu"
+>>>>>>> dc72aa5c011ce0186812a99cc18e247d34217a41
 IMGSZ = 512
 
 
