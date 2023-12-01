@@ -1,5 +1,5 @@
 from comet_ml import API
-from params import *
+from Project.params import *
 
 api = API(api_key=COMETML_APIKEY)
 

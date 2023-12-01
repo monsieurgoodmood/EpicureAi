@@ -1,5 +1,5 @@
 import openai
-from params import *
+from Epicureai_Project.params import *
 
 #def recipe_gpt(ingredients_list: list)-> str:
 #   client = OpenAI()

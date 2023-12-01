@@ -1,7 +1,7 @@
 from ml_logic.roboflow_load import load_data_from_roboflow
 from ml_logic.train import train_model
 from ml_logic.augmentation import augmentation_training_set, augmentation_validation_set
-from Epicureai_Project.params import *
+from Project.params import *
 
 
 def main():

@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import random
 import math
-from params import *
+from Project.params import *
 
 
 def flip_image(image, flipCode):
