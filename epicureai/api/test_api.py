@@ -19,14 +19,14 @@ equipments = ["oven", "blender", "microwave", None]
 diet = random.choice(diets)
 allergies = [allergen for allergen in random.sample(allergens, k=random.randint(0, len(allergens))) if allergen is not None]
 intolerances = [intolerance for intolerance in random.sample(intolerances, k=random.randint(0, len(intolerances))) if intolerance is not None]
-time_available = random.choice(times)
+time_available_in_minutes = random.choice(times)
 kitchen_equipment = [equipment for equipment in random.sample(equipments, k=random.randint(0, len(equipments))) if equipment is not None]
 
 # Préparation de la requête
 multipart_form_data = {
     "file": (image_path.name, open(image_path, "rb"), "image/jpeg"),
     "diet": (None, diet),
-    "time_available": (None, str(time_available)),
+    "time_available": (None, str(time_available_in_minutes)),
 }
 
 # Ajouter chaque allergie, intolérance et équipement comme un champ distinct
@@ -39,13 +39,9 @@ for i, equipment in enumerate(kitchen_equipment):
 
 response = requests.post(url, files=multipart_form_data)
 
-print("Status Code:", response.status_code)
-print("Response Text:", response.text)
-
 if response.status_code == 200:
     try:
         response_json = response.json()
-        print("JSON Response:", response_json)
 
         if 'recipe' in response_json and response_json['recipe'] != "Sorry, I couldn't generate a recipe.":
             print("Generated Recipe:", response_json['recipe'])
@@ -54,8 +50,13 @@ if response.status_code == 200:
 
         # Tester directement la fonction generate_recipe
         ingredients = mock_yolo_model(None)  # Adaptez cette partie selon votre logique réelle de détection d'ingrédients
-        direct_recipe = generate_recipe(ingredients, diet, allergies, intolerances, time_available, kitchen_equipment)
-        print("Direct Recipe Result:", direct_recipe)
+        direct_recipe = generate_recipe(ingredients, diet, allergies, intolerances, time_available_in_minutes, kitchen_equipment)
+
+        # Afficher le contenu de la recette générée
+        if direct_recipe != "Sorry, I couldn't generate a recipe.":
+            print("Direct Recipe Result:", direct_recipe)
+        else:
+            print("No valid direct recipe found.")
 
     except json.decoder.JSONDecodeError:
         print("Erreur de décodage JSON.")

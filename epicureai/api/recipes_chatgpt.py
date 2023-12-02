@@ -1,5 +1,6 @@
 import openai
 from epicureai.params import OPENAI_KEY
+from openai import OpenAI
 
 def mock_yolo_model(image):
     # Simuler une détection d'ingrédients à partir d'une image
@@ -23,7 +24,9 @@ def generate_recipe(ingredients, diet, allergies, intolerances, time_available_i
     if kitchen_equipment:
         user_message += f" Only {', '.join(kitchen_equipment)} are available for use."
 
-    response = openai.chat.completions.create(
+    client = OpenAI(api_key=OPENAI_KEY)
+
+    response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a helpful assistant designed to output recipes."},
@@ -31,14 +34,9 @@ def generate_recipe(ingredients, diet, allergies, intolerances, time_available_i
         ]
     )
 
-    print("Response from OpenAI:", response)  # Imprimer la réponse brute pour le débogage
-
-    if response and 'choices' in response and response['choices']:
-        message = response['choices'][0].get('message')
-        if message:
-            content = message.get('content', '')
-            print("Extracted content:", content)  # Imprimer le contenu extrait pour débogage
-            return content.strip()
+    message = response.choices[0].message.content
+    if message:
+        return message.strip()
 
     print("No valid response or content found.")  # Message de débogage si aucune réponse valide n'est trouvée
     return "Sorry, I couldn't generate a recipe."
