@@ -25,5 +25,10 @@ roboflow:
   version: 12
   workspace: wagon
 test: ../test/images
+<<<<<<< HEAD
 train: /home/marcelhoene/instance-1/raw_data/new_dataset/train/images
 val: /home/marcelhoene/instance-1/raw_data/new_dataset/train/images
+=======
+train: /Users/joaqo/code/joaquin-ortega84/projects/EpicureAi/Project/EpicureAi-12/train/images
+val: /Users/joaqo/code/joaquin-ortega84/projects/EpicureAi/Project/EpicureAi-12/valid/images
+>>>>>>> api-streamlit

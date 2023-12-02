@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 from ml_logic.roboflow_load import load_data_from_roboflow
 from ml_logic.train import train_model
 from ml_logic.augmentation import augmentation_training_set, augmentation_validation_set
 <<<<<<<< HEAD:Project/interface/main.py
+=======
+from Project.ml_logic.roboflow_load import load_data_from_roboflow
+from Project.ml_logic.train import train_model
+from Project.ml_logic.augmentation import augmentation_training_set, augmentation_validation_set
+>>>>>>> api-streamlit
 from Project.params import *
 ========
 from epicureai.params import *

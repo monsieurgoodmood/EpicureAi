@@ -17,8 +17,6 @@ experiment = comet_ml.Experiment(
 def train_model(epochs: int = 10, img_size: int = 512, verbose=True):
     comet_ml.init()
 
-    yaml_path = os.path.join(BASE_DIRECTORY, "data.yaml")
-
     # Load the pre-trained model
 <<<<<<< HEAD
     model = YOLO("yolov8n.pt")
@@ -28,11 +26,16 @@ def train_model(epochs: int = 10, img_size: int = 512, verbose=True):
 >>>>>>> dc72aa5c011ce0186812a99cc18e247d34217a41
     # Train the model
     model.train(
-        data=yaml_path,
+        data=YAML_PATH,
         epochs=NUM_EPOCHS,
         imgsz=img_size,
         save=True,
+<<<<<<< HEAD
         name="yolov8_custom",
+=======
+        device=DEVICE,
+        name="yolov8_20_epochs",
+>>>>>>> api-streamlit
         verbose=verbose
     )
     # Export the model to ONNX format
