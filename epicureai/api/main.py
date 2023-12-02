@@ -8,7 +8,7 @@ from typing import Optional
 import os
 
 # Importer les fonctions depuis recipes_chatgpt
-from recipes_chatgpt import generate_recipe, mock_yolo_model
+from epicureai.api.recipes_chatgpt import generate_recipe, mock_yolo_model
 
 app = FastAPI()
 
