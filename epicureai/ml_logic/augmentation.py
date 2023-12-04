@@ -3,12 +3,7 @@ import cv2
 import numpy as np
 import random
 import math
-<<<<<<<< HEAD:Project/ml_logic/augmentation.py
-from Project.params import *
-========
 from epicureai.params import *
->>>>>>>> API:epicureai/ml_logic/augmentation.py
-
 
 def flip_image(image, flipCode):
     return cv2.flip(image, flipCode)
@@ -155,8 +150,8 @@ new_train_directory = os.path.join(new_dataset_directory, "train")
 new_valid_directory = os.path.join(new_dataset_directory, "valid")
 
 # Nombre d'images dans les ensembles d'entraînement et de validation (à mettre à jour)
-num_train_images = 125  # Mettre à jour avec le nombre réel d'images d'entraînement
-num_valid_images = 54   # Mettre à jour avec le nombre réel d'images de validation
+num_train_images = 253  # Mettre à jour avec le nombre réel d'images d'entraînement
+num_valid_images = 110  # Mettre à jour avec le nombre réel d'images de validation
 total_images = num_train_images + num_valid_images
 num_transformations = 5000  # Nombre total d'images transformées souhaitées
 transformations_per_image = num_transformations // total_images
