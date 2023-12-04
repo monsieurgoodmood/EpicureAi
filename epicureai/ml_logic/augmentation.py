@@ -4,16 +4,18 @@ import numpy as np
 import random
 import math
 from epicureai.params import *
-<<<<<<< HEAD
-=======
-
-
->>>>>>> f425289b4762e60603d7259af00a20a70b58ad74
+import os
+import cv2
+import random
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+import shutil
 
 def flip_image(image, flipCode):
     return cv2.flip(image, flipCode)
 
-# Fonction pour lire les annotations
 def read_annotation(file_path):
     with open(file_path, 'r') as file:
         annotations = file.readlines()
@@ -23,11 +25,11 @@ def flip_annotations(annotations, image_width, image_height, flipCode):
     new_annotations = []
     for annotation in annotations:
         class_id, x_center, y_center, width, height = map(float, annotation.split())
-        if flipCode == 1:  # Flip horizontal
+        if flipCode == 1:
             x_center = 1 - x_center
-        elif flipCode == 0:  # Flip vertical
+        elif flipCode == 0:
             y_center = 1 - y_center
-        elif flipCode == -1:  # Flip both
+        elif flipCode == -1:
             x_center = 1 - x_center
             y_center = 1 - y_center
         new_annotations.append(f"{class_id} {x_center} {y_center} {width} {height}\n")
@@ -42,8 +44,6 @@ def adjust_brightness(image, value):
     final_hsv = cv2.merge((h, s, v))
     return cv2.cvtColor(final_hsv, cv2.COLOR_HSV2BGR)
 
-
-# Fonction pour écrire les nouvelles annotations
 def write_annotation(new_file_path, annotations):
     with open(new_file_path, 'w') as file:
         for annotation in annotations:
@@ -57,19 +57,16 @@ def rotate_image(image, angle):
 
 def adjust_annotations_for_rotation(annotations, image_width, image_height, angle):
     new_annotations = []
-    # Convertir l'angle de degrés en radians pour la rotation
     angle_rad = math.radians(angle)
 
     for annotation in annotations:
         class_id, x_center, y_center, width, height = map(float, annotation.split())
 
-        # Convertir les coordonnées du centre en pixels
         x_center = x_center * image_width
         y_center = y_center * image_height
         bbox_width = width * image_width
         bbox_height = height * image_height
 
-        # Calculer l'angle de rotation en fonction de l'angle donné
         if angle == 90:
             x_center_new = y_center / image_height
             y_center_new = 1 - (x_center / image_width)
@@ -83,7 +80,6 @@ def adjust_annotations_for_rotation(annotations, image_width, image_height, angl
             x_center_new = x_center / image_width
             y_center_new = y_center / image_height
 
-        # Pour une rotation de 90 ou 270 degrés, échangez la largeur et la hauteur de la boîte englobante
         if angle in [90, 270]:
             width_new = bbox_height / image_width
             height_new = bbox_width / image_height
@@ -91,12 +87,28 @@ def adjust_annotations_for_rotation(annotations, image_width, image_height, angl
             width_new = bbox_width / image_width
             height_new = bbox_height / image_height
 
-        # Ajouter la nouvelle annotation à la liste
         new_annotations.append(f"{class_id} {x_center_new} {y_center_new} {width_new} {height_new}\n")
 
     return new_annotations
 
-# Appliquer une transformation aléatoire à une image
+def replace_background(image, annotations, new_background_color):
+    mask = np.zeros(image.shape[:2], dtype="uint8")
+
+    for annotation in annotations:
+        class_id, x_center, y_center, width, height = map(float, annotation.split())
+        x_center, y_center, width, height = (x_center * image.shape[1], y_center * image.shape[0],
+                                             width * image.shape[1], height * image.shape[0])
+        top_left = (int(x_center - width / 2), int(y_center - height / 2))
+        bottom_right = (int(x_center + width / 2), int(y_center + height / 2))
+        cv2.rectangle(mask, top_left, bottom_right, 255, -1)
+
+    background_mask = cv2.bitwise_not(mask)
+    background = np.full(image.shape, new_background_color, dtype="uint8")
+    foreground = cv2.bitwise_and(image, image, mask=mask)
+    new_background = cv2.bitwise_and(background, background, mask=background_mask)
+    result = cv2.add(foreground, new_background)
+    return result
+
 def apply_random_transformation(image, annotations, transformation_type):
     if transformation_type == 'flip':
         flipCode = random.choice([-1, 0, 1])
@@ -107,9 +119,14 @@ def apply_random_transformation(image, annotations, transformation_type):
         transformed_image = adjust_brightness(image, brightness_value)
         transformed_annotations = annotations
     elif transformation_type == 'rotate':
-        angle = random.choice([0, 90, 180, 270])  # Choix aléatoire d'angle
+        angle = random.choice([0, 90, 180, 270])
         transformed_image = rotate_image(image, angle)
         transformed_annotations = adjust_annotations_for_rotation(annotations, image.shape[1], image.shape[0], angle)
+    elif transformation_type == 'background':
+        for _ in range(10):  # Generate 10 different backgrounds
+            background_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+            transformed_image = replace_background(image, annotations, background_color)
+            transformed_annotations = annotations  # Background change does not affect annotations
     return transformed_image, transformed_annotations
 
 def process_images_annotations(images_directory, annotations_directory, new_base_directory, transformations_dict, subset_type):
@@ -117,12 +134,19 @@ def process_images_annotations(images_directory, annotations_directory, new_base
     files = [f for f in os.listdir(images_directory) if f.endswith(".jpg")]
     random.shuffle(files)
 
-    # Définition des chemins pour les sous-dossiers 'images' et 'labels'
     subset_images_directory = os.path.join(new_base_directory, subset_type, "images")
     subset_annotations_directory = os.path.join(new_base_directory, subset_type, "labels")
     os.makedirs(subset_images_directory, exist_ok=True)
     os.makedirs(subset_annotations_directory, exist_ok=True)
 
+    # Copier les images et annotations originales
+    for filename in files:
+        original_image_path = os.path.join(images_directory, filename)
+        original_annotation_path = os.path.join(annotations_directory, filename.replace('.jpg', '.txt'))
+        shutil.copy(original_image_path, subset_images_directory)
+        shutil.copy(original_annotation_path, subset_annotations_directory)
+
+    # Appliquer les transformations
     for filename in files:
         file_path = os.path.join(images_directory, filename)
         annotation_path = os.path.join(annotations_directory, filename.replace('.jpg', '.txt'))
@@ -133,7 +157,6 @@ def process_images_annotations(images_directory, annotations_directory, new_base
             for _ in range(num_times):
                 transformed_image, transformed_annotations = apply_random_transformation(image, annotations, transformation_type)
 
-                # Utiliser les sous-dossiers pour enregistrer les fichiers transformés
                 new_image_file = os.path.join(subset_images_directory, f"{transformation_type}_image_{new_images_count}.jpg")
                 new_annotation_file = os.path.join(subset_annotations_directory, f"{transformation_type}_annotation_{new_images_count}.txt")
 
@@ -141,32 +164,31 @@ def process_images_annotations(images_directory, annotations_directory, new_base
                 write_annotation(new_annotation_file, transformed_annotations)
                 new_images_count += 1
 
-# Dossiers pour le dataset original
-base_directory = LOCAL_DATA_PATH
 
+# Configuration des chemins
+base_directory = "/Users/arthurchoisnet/code/monsieurgoodmood/EpicureAi/raw_data/EpicureAi.v12-balanced_data_set.yolov8"
 train_images_directory = os.path.join(base_directory, "train/images")
 train_annotations_directory = os.path.join(base_directory, "train/labels")
 validation_images_directory = os.path.join(base_directory, "valid/images")
 validation_annotations_directory = os.path.join(base_directory, "valid/labels")
 
-# Chemins pour le nouveau dataset
-new_dataset_directory = "raw_data/new_dataset"
+new_dataset_directory = "raw_data/new_dataset_transformed"
 new_train_directory = os.path.join(new_dataset_directory, "train")
 new_valid_directory = os.path.join(new_dataset_directory, "valid")
 
-# Nombre d'images dans les ensembles d'entraînement et de validation (à mettre à jour)
-num_train_images = 253  # Mettre à jour avec le nombre réel d'images d'entraînement
-num_valid_images = 110  # Mettre à jour avec le nombre réel d'images de validation
+num_train_images = 253
+num_valid_images = 110
 total_images = num_train_images + num_valid_images
-num_transformations = 5000  # Nombre total d'images transformées souhaitées
+num_transformations = 5000
 transformations_per_image = num_transformations // total_images
 
-# Définir le nombre de fois que chaque transformation doit être appliquée
 transformations_dict = {
-    'flip': transformations_per_image // 3,
-    'brightness': transformations_per_image // 3,
-    'rotate': transformations_per_image // 3
+    'flip': transformations_per_image // 4,
+    'brightness': transformations_per_image // 4,
+    'rotate': transformations_per_image // 4,
+    'background': 10  # Ajouter 10 variations d'arrière-plan pour chaque image
 }
+
 
 def augmentation_training_set():
     # Appliquer les transformations sur l'ensemble d'entraînement
@@ -174,5 +196,5 @@ def augmentation_training_set():
 
 def augmentation_validation_set():
     # Ajuster les transformations pour l'ensemble de validation si nécessaire
-    transformations_dict['flip'] += transformations_per_image % 3
+    transformations_dict['flip'] += transformations_per_image % 4
     return process_images_annotations(validation_images_directory, validation_annotations_directory, new_dataset_directory, transformations_dict, "valid")
