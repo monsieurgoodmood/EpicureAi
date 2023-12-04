@@ -4,6 +4,7 @@ import numpy as np
 import random
 import math
 from epicureai.params import *
+<<<<<<< HEAD
 import os
 import cv2
 import random
@@ -12,6 +13,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import shutil
+=======
+
+
+>>>>>>> 7eea210e421cde30d636b81b651d9f9e91172bd4
 
 def flip_image(image, flipCode):
     return cv2.flip(image, flipCode)
