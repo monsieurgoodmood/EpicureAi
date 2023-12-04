@@ -3,11 +3,8 @@ import cv2
 import numpy as np
 import random
 import math
-<<<<<<<< HEAD:Project/ml_logic/augmentation.py
 from Project.params import *
-========
 from epicureai.params import *
->>>>>>>> API:epicureai/ml_logic/augmentation.py
 
 
 def flip_image(image, flipCode):

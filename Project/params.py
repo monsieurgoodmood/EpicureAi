@@ -1,16 +1,8 @@
 import os
 
 # Model training
-<<<<<<< HEAD
 NUM_EPOCHS = 10
-<<<<<<< HEAD
-=======
-NUM_EPOCHS = 20
->>>>>>> api-streamlit
-DEVICE = "cpu"
-=======
 DEVICE = "gpu"
->>>>>>> dc72aa5c011ce0186812a99cc18e247d34217a41
 IMGSZ = 512
 
 # Comet ML
