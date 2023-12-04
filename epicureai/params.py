@@ -1,11 +1,8 @@
 import os
 
 # Model training
-NUM_EPOCHS = 10
 DEVICE = "gpu"
-# Model training
-NUM_EPOCHS = 12
-DEVICE = "cpu"
+NUM_EPOCHS = 10
 IMGSZ = 512
 
 # Comet ML

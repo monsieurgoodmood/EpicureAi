@@ -10,7 +10,7 @@ def main():
     #print('✅ done with augmenting training set')
     #augmentation_validation_set()
     #print('✅ done with augmenting validation set')
-    train_model(epochs=NUM_EPOCHS)
+    # train_model(epochs=NUM_EPOCHS)
 
 if __name__ == "__main__":
     main()
