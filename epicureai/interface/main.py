@@ -17,13 +17,13 @@ def main():
 
 
 def main():
-    # load_data_from_roboflow()
-    # augmentation_training_set()
-    # print('✅ done with augmenting training set')
-    # augmentation_validation_set()
-    # print('✅ done with augmenting validation set')
-    # create_data_yaml()
-    # print('✅ data.yaml with augmented images created')
+    load_data_from_roboflow()
+    augmentation_training_set()
+    print('✅ done with augmenting training set')
+    augmentation_validation_set()
+    print('✅ done with augmenting validation set')
+    create_data_yaml()
+    print('✅ data.yaml with augmented images created')
     train_model(epochs=NUM_EPOCHS)
 >>>>>>> 2954507dc570f6fc03fb468a1a77bfc5c2397e01
 
