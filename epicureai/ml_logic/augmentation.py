@@ -4,7 +4,6 @@ import numpy as np
 import random
 import math
 from epicureai.params import *
-<<<<<<< HEAD
 import os
 import cv2
 import random
@@ -13,10 +12,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import shutil
-=======
-
-
->>>>>>> 7eea210e421cde30d636b81b651d9f9e91172bd4
 
 def flip_image(image, flipCode):
     return cv2.flip(image, flipCode)
@@ -193,7 +188,6 @@ transformations_dict = {
     'rotate': transformations_per_image // 4,
     'background': 10  # Ajouter 10 variations d'arrière-plan pour chaque image
 }
-
 
 def augmentation_training_set():
     # Appliquer les transformations sur l'ensemble d'entraînement
