@@ -89,4 +89,4 @@ def train_model(epochs: int = 10, img_size: int = 512):
 
 # Main execution
 if __name__ == "__main__":
-    train_model(epochs=NUM_EPOCHS)
+    train_model(epochs=10)
