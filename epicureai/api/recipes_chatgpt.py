@@ -1,10 +1,5 @@
 import openai
-<<<<<<< HEAD:epicureai/api/recipes_chatgpt.py
-from epicureai.params import OPENAI_KEY
-from openai import OpenAI
-=======
 from Project.params import OPENAI_KEY
->>>>>>> api-streamlit:epicureai/API_backend/recipes_chatgpt.py
 
 def mock_yolo_model(image):
     # Simuler une détection d'ingrédients à partir d'une image
