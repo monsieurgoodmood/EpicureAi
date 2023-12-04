@@ -4,11 +4,8 @@ import numpy as np
 import random
 import math
 from epicureai.params import *
-<<<<<<< HEAD
-=======
 
 
->>>>>>> f425289b4762e60603d7259af00a20a70b58ad74
 
 def flip_image(image, flipCode):
     return cv2.flip(image, flipCode)
