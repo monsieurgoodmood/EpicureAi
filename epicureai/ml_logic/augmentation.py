@@ -1,10 +1,4 @@
-import os
-import cv2
-import numpy as np
-import random
-import math
 from epicureai.params import *
-<<<<<<< HEAD
 import os
 import cv2
 import random
@@ -13,10 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import shutil
-=======
-
-
->>>>>>> 7eea210e421cde30d636b81b651d9f9e91172bd4
+import yaml
 
 def flip_image(image, flipCode):
     return cv2.flip(image, flipCode)
@@ -171,13 +162,15 @@ def process_images_annotations(images_directory, annotations_directory, new_base
 
 
 # Configuration des chemins
-base_directory = "/Users/arthurchoisnet/code/monsieurgoodmood/EpicureAi/raw_data/EpicureAi.v12-balanced_data_set.yolov8"
+base_directory = LOCAL_DATA_PATH
 train_images_directory = os.path.join(base_directory, "train/images")
 train_annotations_directory = os.path.join(base_directory, "train/labels")
 validation_images_directory = os.path.join(base_directory, "valid/images")
 validation_annotations_directory = os.path.join(base_directory, "valid/labels")
 
-new_dataset_directory = "raw_data/new_dataset_transformed"
+# new_dataset_directory = "raw_data/new_dataset_transformed"
+new_dataset_directory = os.path.join(LOCAL_DATA_PATH, 'augmented_data')
+os.makedirs(new_dataset_directory, exist_ok=True)
 new_train_directory = os.path.join(new_dataset_directory, "train")
 new_valid_directory = os.path.join(new_dataset_directory, "valid")
 
