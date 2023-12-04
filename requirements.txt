@@ -1,5 +1,11 @@
 openai
+fastapi
+uvicorn
+python-multipart
+numpy
+opencv-python-headless
 ultralytics
 comet_ml
 pandas
 streamlit
+roboflow
