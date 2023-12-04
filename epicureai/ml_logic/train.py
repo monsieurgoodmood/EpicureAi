@@ -44,7 +44,7 @@ def train_model(epochs: int = 10, img_size: int = 512):
        # print(f":x: Could not load weights: {error}")
 
         # Initialize a new YOLO model with default weights
-    model = YOLO("yolov8n.pt")
+    model = YOLO('yolov8n.yaml').load('yolov8n.pt')
     model.train(
         data=os.path.join(LOCAL_DATA_PATH,'augmented_data',"data.yaml"),
         epochs=epochs,
