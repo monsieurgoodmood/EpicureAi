@@ -1,14 +1,11 @@
 openai
-<<<<<<< HEAD
 fastapi
 uvicorn
 python-multipart
 numpy
 opencv-python-headless
-openai
-=======
 ultralytics
 comet_ml
 pandas
 streamlit
->>>>>>> api-streamlit
+roboflow

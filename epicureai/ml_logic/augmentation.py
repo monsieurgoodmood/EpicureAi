@@ -3,11 +3,8 @@ import cv2
 import numpy as np
 import random
 import math
-<<<<<<<< HEAD:Project/ml_logic/augmentation.py
-from Project.params import *
-========
 from epicureai.params import *
->>>>>>>> API:epicureai/ml_logic/augmentation.py
+
 
 
 def flip_image(image, flipCode):
@@ -142,7 +139,7 @@ def process_images_annotations(images_directory, annotations_directory, new_base
                 new_images_count += 1
 
 # Dossiers pour le dataset original
-base_directory = BASE_DIRECTORY
+base_directory = LOCAL_DATA_PATH
 
 train_images_directory = os.path.join(base_directory, "train/images")
 train_annotations_directory = os.path.join(base_directory, "train/labels")
