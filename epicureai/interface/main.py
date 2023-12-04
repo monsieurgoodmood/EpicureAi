@@ -7,11 +7,11 @@ from epicureai.params import *
 def main():
     load_data_from_roboflow()
     # Need to update the paths to our data in data.yaml
-    #augmentation_training_set()
-    #print('✅ done with augmenting training set')
-    #augmentation_validation_set()
-    #print('✅ done with augmenting validation set')
-    # train_model(epochs=NUM_EPOCHS)
+    augmentation_training_set()
+    print('✅ done with augmenting training set')
+    augmentation_validation_set()
+    print('✅ done with augmenting validation set')
+    train_model(epochs=NUM_EPOCHS)
 
 if __name__ == "__main__":
     main()

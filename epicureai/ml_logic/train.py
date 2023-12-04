@@ -1,14 +1,8 @@
 from ultralytics import YOLO
-<<<<<<< HEAD
-import os
-from epicureai.params import *
-import yaml
-=======
 from epicureai.params import *
 import os
 import comet_ml
 from comet_ml import API
->>>>>>> f425289b4762e60603d7259af00a20a70b58ad74
 
 
 # Function to train the model
@@ -25,18 +19,6 @@ def train_model(epochs: int = 10, img_size: int = 512):
             model_name=COMET_MODEL_NAME,
         )
 
-<<<<<<< HEAD
-    # Load the pre-trained model
-    model = YOLO('yolov8n.yaml').load('yolov8n.pt')
-    # Train the model
-    model.train(
-        data=yaml_path,
-        epochs=NUM_EPOCHS,
-        imgsz=img_size,
-        save=True,
-        name="yolov8_custom",
-        verbose=verbose
-=======
         # Get production model weights
         model_versions = models.find_versions(status="Production")
         latest_production_weights = model_versions[0]
@@ -73,7 +55,6 @@ def train_model(epochs: int = 10, img_size: int = 512):
     # Save the trained model weights to Comet ML
     experiments = api.get(
         workspace=COMET_WORKSPACE_NAME, project_name=COMET_PROJECT_NAME
->>>>>>> f425289b4762e60603d7259af00a20a70b58ad74
     )
 
     # Registering the latest experiment and model
