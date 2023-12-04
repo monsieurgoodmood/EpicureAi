@@ -23,10 +23,11 @@ def train_model(epochs: int = 10, img_size: int = 512, verbose=True):
         epochs=NUM_EPOCHS,
         imgsz=img_size,
         save=True,
+        #device=0,
         name="yolov8_custom",
-        verbose=verbose
+
     )
-    # Export the model to ONNX format
+    # Export the model
     path = model.export()
     print('✅ finished with training and exported the model' )
 

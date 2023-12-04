@@ -2,7 +2,7 @@ import os
 
 # Model training
 NUM_EPOCHS = 10
-DEVICE = "gpu"
+DEVICE = {0}
 IMGSZ = 512
 
 

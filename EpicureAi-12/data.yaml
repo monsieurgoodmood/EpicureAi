@@ -25,5 +25,5 @@ roboflow:
   version: 12
   workspace: wagon
 test: ../test/images
-train: /home/marcelhoene/instance-1/raw_data/new_dataset/train/images
-val: /home/marcelhoene/instance-1/raw_data/new_dataset/train/images
+train: /home/marcelhoene/instance-4/EpicureAi-12/train/images #/Users/marcelhoene/code/monsieurgoodmood/EpicureAi/EpicureAi-12/train/images #/home/marcelhoene/instance-1/EpicureAi-12/train/images
+val: /home/marcelhoene/instance-4/EpicureAi-12/valid/images #/Users/marcelhoene/code/monsieurgoodmood/EpicureAi/EpicureAi-12/valid/images #/home/marcelhoene/instance-1/EpicureAi-12/valid/images
