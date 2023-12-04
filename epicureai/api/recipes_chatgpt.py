@@ -1,6 +1,5 @@
 import openai
-from epicureai.params import OPENAI_KEY
-from openai import OpenAI
+from Project.params import OPENAI_KEY
 
 def mock_yolo_model(image):
     # Simuler une détection d'ingrédients à partir d'une image

@@ -4,4 +4,8 @@ uvicorn
 python-multipart
 numpy
 opencv-python-headless
-openai
+ultralytics
+comet_ml
+pandas
+streamlit
+roboflow

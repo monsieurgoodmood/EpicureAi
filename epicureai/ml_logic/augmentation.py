@@ -4,6 +4,11 @@ import numpy as np
 import random
 import math
 from epicureai.params import *
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> f425289b4762e60603d7259af00a20a70b58ad74
 
 def flip_image(image, flipCode):
     return cv2.flip(image, flipCode)
@@ -137,7 +142,7 @@ def process_images_annotations(images_directory, annotations_directory, new_base
                 new_images_count += 1
 
 # Dossiers pour le dataset original
-base_directory = BASE_DIRECTORY
+base_directory = LOCAL_DATA_PATH
 
 train_images_directory = os.path.join(base_directory, "train/images")
 train_annotations_directory = os.path.join(base_directory, "train/labels")
