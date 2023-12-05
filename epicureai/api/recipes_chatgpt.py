@@ -1,9 +1,7 @@
 import openai
-from params import OPENAI_KEY
+from epicureai.params import OPENAI_KEY
 from epicureai.ml_logic.predict import yolo_predict_ingedients
 
-
-ingedients = yolo_predict_ingedients()
 
 def generate_recipe(ingredients, diet, allergies, intolerances, time_available_in_minutes, kitchen_equipment):
     openai.api_key = OPENAI_KEY
