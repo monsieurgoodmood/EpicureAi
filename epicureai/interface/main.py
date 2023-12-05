@@ -15,5 +15,6 @@ def main():
     #print('✅ data.yaml with augmented images created')
     train_model(epochs=NUM_EPOCHS)
 
+
 if __name__ == "__main__":
     main()

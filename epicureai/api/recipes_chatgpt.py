@@ -1,8 +1,7 @@
 import openai
-from Project.params import OPENAI_KEY
+from params import OPENAI_KEY
 
-def mock_yolo_model(image):
-    # Simuler une détection d'ingrédients à partir d'une image
+def yolo_predict(uploaded_image):
     return ["spaghetti", "oats", "courgette"]
 
 def generate_recipe(ingredients, diet, allergies, intolerances, time_available_in_minutes, kitchen_equipment):
