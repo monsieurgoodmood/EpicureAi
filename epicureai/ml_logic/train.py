@@ -49,7 +49,7 @@ def train_model(epochs: int = 10, img_size: int = 512):
         data=os.path.join(LOCAL_DATA_PATH,'augmented_data',"data.yaml"),
         epochs=epochs,
         imgsz=img_size,
-        patience=20,
+
     )
 
     # Save the trained model weights to Comet ML
