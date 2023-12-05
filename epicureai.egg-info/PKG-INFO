@@ -1,6 +1,0 @@
-Metadata-Version: 2.1
-Name: epicureai
-Version: 0.0.0
-Requires-Dist: openai
-Requires-Dist: ultralytics
-Requires-Dist: comet_ml

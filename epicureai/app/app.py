@@ -5,7 +5,8 @@ from element import create_file_uploader, create_diet_selector, create_multisele
 from PIL import Image
 import os
 import pandas as pd
-from epicureai.api.recipes_chatgpt import mock_yolo_model, generate_recipe
+from epicureai.api.recipes_chatgpt import generate_recipe
+from epicureai.ml_logic.predict import yolo_predict_ingedients
 
 # Configuration de la page et chargement des styles CSS
 st.set_page_config(page_title="Epicure AI", layout="wide")
@@ -66,10 +67,10 @@ if uploaded_image is not None:
         st.image(Image.open(pred_image_path), caption="Detection by model", use_column_width=True, width=200)
 
     st.subheader("Epicure AI has detected the following ingredients:")
-    ingredients_df = mock_yolo_model(uploaded_image)
+    ingredients_df = yolo_predict_ingedients(uploaded_image)
     st.dataframe(ingredients_df)
 
-    ingredients = mock_yolo_model(uploaded_image)
+    ingredients = yolo_predict_ingedients(uploaded_image)
     #st.write(", ".join(ingredients))
 
     # Générer la recette et afficher le résultat

@@ -1,17 +1,23 @@
 from ultralytics import YOLO
 from epicureai.params import *
+import os
 
-uploaded_image = '/Users/joaqo/code/joaquin-ortega84/projects/EpicureAi/epicureai/app/prediction.jpg'
+uploaded_image = os.path.join(os.getcwd(),'epicureai','app','uploaded_image_predict.jpeg')
+print(uploaded_image)
 
-def yolo_predict(uploaded_image):
-    # Load the YOLOv8 model
-    model = YOLO('/Users/joaqo/code/joaquin-ortega84/projects/EpicureAi/yolov8n.pt')
+best_model = os.path.join(os.getcwd(),'best-113.pt')
 
-    # Make predictions on the uploaded image
+def yolo_predict_ingedients(uploaded_image):
+    model = YOLO(best_model)
     results = model(uploaded_image)
 
-    # Print or return the results as needed
-    print(results)
-    return results
+    names = model.names
 
-yolo_predict(uploaded_image)
+    ingredients = []
+    for r in results:
+        for c in r.boxes.cls:
+            ingredients.append(names[int(c)])
+
+    return ingredients
+
+yolo_predict_ingedients(uploaded_image)
