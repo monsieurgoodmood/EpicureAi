@@ -1,10 +1,17 @@
 import openai
+<<<<<<< HEAD
 from epicureai.params import OPENAI_KEY
 
 def mock_yolo_model(uploaded_image):
     # Simuler une détection d'ingrédients à partir d'une image
     uploaded_image = ["spaghetti", "oats", "courgette"]
     return uploaded_image
+=======
+from params import OPENAI_KEY
+
+def yolo_predict(uploaded_image):
+    return ["spaghetti", "oats", "courgette"]
+>>>>>>> modelling
 
 def generate_recipe(ingredients, diet, allergies, intolerances, time_available_in_minutes, kitchen_equipment):
     openai.api_key = OPENAI_KEY
