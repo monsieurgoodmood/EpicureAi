@@ -20,17 +20,12 @@ st.write("Revolutionize your culinary experience with AI")
 
 # Creating line breaks for spacing
 st.markdown("<br>", unsafe_allow_html=True)
-st.markdown("<br>", unsafe_allow_html=True)
 
 
 st.subheader('Select your dietary requirements...')
 
-# Creating line breaks for spacing
-st.markdown("<br>", unsafe_allow_html=True)
-st.markdown("<br>", unsafe_allow_html=True)
-
 # Options pour le formulaire
-diets = ["", "Plant-based", "Vegetarian", "Pescatarian", "Gluten-Free", "Ketogenic", "Paleo", "Low-Carb", "Mediterranean", "Whole30", "DASH", "Low-FODMAP", "Flexitarian", "High-Protein"]
+diets = ["N/A", "Plant-based", "Vegetarian", "Pescatarian", "Gluten-Free", "Ketogenic", "Paleo", "Low-Carb", "Mediterranean", "Whole30", "DASH", "Low-FODMAP", "Flexitarian", "High-Protein"]
 health_conditions_options = ["Diabetes", "High Cholesterol", "Hypertension", "Heart Disease", "Celiac Disease", "Kidney Disease", "Liver Disease"]
 allergen_options = ["Peanuts", "Tree nuts", "Milk", "Eggs", "Fish", "Shellfish", "Molluscs", "Soy", "Gluten", "Sesame", "Mustard", "Celery", "Lupin", "Sulfites"]
 intolerance_options = ["Lactose", "Gluten", "Fructose", "Histamine", "Caffeine", "Food Additives", "Salicylates", "Amines", "FODMAPs", "Sulfites", "Corn", "Yeast", "MSG"]
@@ -44,7 +39,8 @@ selected_intolerances = st.multiselect("Select intolerances", intolerance_option
 selected_equipment = st.multiselect("Select kitchen equipment", equipment_options)
 time_available_in_minutes = st.slider("Time available for cooking (minutes)", min_value=15, max_value=120, value=30, step=5)
 
-# Section de téléchargement d'image
+
+st.markdown("<br>", unsafe_allow_html=True)
 st.subheader('Take a picture of your ingredients...')
 uploaded_image = st.file_uploader("Upload image...", type="jpg")
 
@@ -58,11 +54,11 @@ if uploaded_image is not None:
     # Display the uploaded image
     col1, col2 = st.columns(2)
     with col1:
-        st.write('My ingredients')
+        st.markdown('#### My ingredients')
         st.image(Image.open(image_path), caption="My ingredients", use_column_width=True, width=200)
     with col2:
-        st.write('Detection by model')
-        pred_image_path = os.path.join(os.getcwd(), 'prediction.jpg')
+        st.markdown('#### Detection by model')
+        pred_image_path = os.path.join(os.getcwd(), 'epicureai/app/prediction.jpg')
         st.image(Image.open(pred_image_path), caption="Detection by model", use_column_width=True, width=200)
 
     st.subheader("Epicure AI has detected the following ingredients:")
@@ -77,3 +73,5 @@ if uploaded_image is not None:
 
     st.subheader("Epicure AI Recipe Suggestion:")
     st.write(recipe_text)
+
+print(os.getcwd())
