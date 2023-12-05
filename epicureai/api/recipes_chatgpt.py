@@ -22,7 +22,7 @@ def generate_recipe(ingredients, diet, allergies, intolerances, time_available_i
     if kitchen_equipment:
         user_message += f" Only {', '.join(kitchen_equipment)} are available for use."
 
-    client = OpenAI(api_key=OPENAI_KEY)
+    client = openai(api_key=OPENAI_KEY)
 
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
