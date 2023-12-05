@@ -1,12 +1,13 @@
 # app.py
 import streamlit as st
+import os
 from style import load_styles
 from element import create_file_uploader, create_diet_selector, create_multiselect, create_time_slider, create_api_request
 from PIL import Image
-import os
 import pandas as pd
 from epicureai.api.recipes_chatgpt import generate_recipe
 from epicureai.ml_logic.predict import yolo_predict_ingedients
+from epicureai.params import *
 
 # Configuration de la page et chargement des styles CSS
 st.set_page_config(page_title="Epicure AI", layout="wide")
@@ -45,10 +46,9 @@ st.markdown("<br>", unsafe_allow_html=True)
 st.subheader('Take a picture of your ingredients...')
 uploaded_image = st.file_uploader("Upload image...", type="jpg")
 
-# Save and display the uploaded image
 if uploaded_image is not None:
     # Save the uploaded image
-    image_path = os.path.join(os.getcwd(), "uploaded_image.jpg")
+    image_path = os.path.join(os.getcwd(), 'epicureai', 'app', 'images', 'uploaded_image.jpg')
     with open(image_path, "wb") as f:
         f.write(uploaded_image.read())
 
@@ -58,8 +58,9 @@ if uploaded_image is not None:
         st.markdown('#### My ingredients')
         st.image(Image.open(image_path), caption="My ingredients", use_column_width=True, width=200)
     with col2:
-        st.markdown('#### Detection by model')
-        pred_image_path = os.path.join(os.getcwd(), 'epicureai/app/prediction.jpg')
+        st.write('Detection by model')
+        # You can use the same image_path for the prediction image
+        pred_image_path = os.path.join(os.getcwd(), 'runs','detect','predict','uploaded_image.jpg')
         st.image(Image.open(pred_image_path), caption="Detection by model", use_column_width=True, width=200)
 
     st.subheader("Epicure AI has detected the following ingredients:")

@@ -1,5 +1,0 @@
-roboflow
-ipykernel
-pandas
-numpy
-comet_ml
