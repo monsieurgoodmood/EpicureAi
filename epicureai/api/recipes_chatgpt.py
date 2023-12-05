@@ -8,9 +8,15 @@ def mock_yolo_model(uploaded_image):
     return uploaded_image
 =======
 from params import OPENAI_KEY
+from epicureai.ml_logic.predict import yolo_predict_ingedients
 
+<<<<<<< HEAD
 def yolo_predict(uploaded_image):
     return ["spaghetti", "oats", "courgette"]
+>>>>>>> modelling
+=======
+
+ingedients = yolo_predict_ingedients()
 >>>>>>> modelling
 
 def generate_recipe(ingredients, diet, allergies, intolerances, time_available_in_minutes, kitchen_equipment):
