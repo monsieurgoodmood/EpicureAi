@@ -1,23 +1,7 @@
 import openai
-<<<<<<< HEAD
 from epicureai.params import OPENAI_KEY
-
-def mock_yolo_model(uploaded_image):
-    # Simuler une détection d'ingrédients à partir d'une image
-    uploaded_image = ["spaghetti", "oats", "courgette"]
-    return uploaded_image
-=======
-from params import OPENAI_KEY
 from epicureai.ml_logic.predict import yolo_predict_ingedients
 
-<<<<<<< HEAD
-def yolo_predict(uploaded_image):
-    return ["spaghetti", "oats", "courgette"]
->>>>>>> modelling
-=======
-
-ingedients = yolo_predict_ingedients()
->>>>>>> modelling
 
 def generate_recipe(ingredients, diet, allergies, intolerances, time_available_in_minutes, kitchen_equipment):
     openai.api_key = OPENAI_KEY
@@ -37,9 +21,8 @@ def generate_recipe(ingredients, diet, allergies, intolerances, time_available_i
     if kitchen_equipment:
         user_message += f" Only {', '.join(kitchen_equipment)} are available for use."
 
-    client = openai(api_key=OPENAI_KEY)
 
-    response = client.chat.completions.create(
+    response = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a helpful assistant designed to output recipes."},

@@ -2,11 +2,12 @@ import requests
 import random
 from pathlib import Path
 import json
-from recipes_chatgpt import generate_recipe, yolo_predict  # Ajout de l'importation
+from recipes_chatgpt import generate_recipe
+from epicureai.ml_logic.predict import yolo_predict_ingedients
 
 url = "http://localhost:8000/upload_image"
 # Chemin vers l'image
-image_path = Path("/Users/arthurchoisnet/code/monsieurgoodmood/EpicureAi/raw_data/new_dataset/train/images/brightness_image_4.jpg")
+image_path = Path("/Users/arthurchoisnet/code/monsieurgoodmood/EpicureAi/epicureai/app/uploaded_image_predict.jpeg")
 
 # Listes des valeurs possibles pour chaque paramètre
 diets = ["vegetarian", "vegan", "gluten-free", None]
@@ -42,23 +43,9 @@ response = requests.post(url, files=multipart_form_data)
 if response.status_code == 200:
     try:
         response_json = response.json()
-
-        if 'recipe' in response_json and response_json['recipe'] != "Sorry, I couldn't generate a recipe.":
-            print("Generated Recipe:", response_json['recipe'])
-        else:
-            print("No valid recipe found in the response.")
-
-        # Tester directement la fonction generate_recipe
-        ingredients = yolo_predict(None)  # Adaptez cette partie selon votre logique réelle de détection d'ingrédients
-        direct_recipe = generate_recipe(ingredients, diet, allergies, intolerances, time_available_in_minutes, kitchen_equipment)
-
-        # Afficher le contenu de la recette générée
-        if direct_recipe != "Sorry, I couldn't generate a recipe.":
-            print("Direct Recipe Result:", direct_recipe)
-        else:
-            print("No valid direct recipe found.")
-
+        print("Generated Recipe:", response_json['recipe'])
     except json.decoder.JSONDecodeError:
         print("Erreur de décodage JSON.")
 else:
-    print("La requête POST a échoué.")
+    print(f"La requête POST a échoué avec le statut : {response.status_code}")
+    print(f"Réponse : {response.text}")
