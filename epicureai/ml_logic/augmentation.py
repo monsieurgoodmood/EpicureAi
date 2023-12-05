@@ -83,7 +83,7 @@ def adjust_annotations_for_rotation(annotations, image_width, image_height, angl
             width_new = bbox_width / image_width
             height_new = bbox_height / image_height
 
-        new_annotations.append(f"{class_id} {x_center_new} {y_center_new} {width_new} {height_new}\n")
+        new_annotations.append(f"{int(class_id)} {x_center_new} {y_center_new} {width_new} {height_new}\n")
 
     return new_annotations
 
