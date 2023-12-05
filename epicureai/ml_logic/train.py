@@ -1,14 +1,8 @@
 from ultralytics import YOLO
-<<<<<<< HEAD
-import os
-from epicureai.params import *
-import yaml
-=======
 from epicureai.params import *
 import os
 import comet_ml
 from comet_ml import API
->>>>>>> f425289b4762e60603d7259af00a20a70b58ad74
 
 
 # Function to train the model
@@ -18,62 +12,49 @@ def train_model(epochs: int = 10, img_size: int = 512):
     comet_ml.init()
 
     # Try to use pretrained weights if available
-    try:
-        # Fetching the model from Comet ML
-        models = api.get_model(
-            workspace=COMET_WORKSPACE_NAME,
-            model_name=COMET_MODEL_NAME,
-        )
+    #try:
+    #    # Fetching the model from Comet ML
+    #    models = api.get_model(
+    #        workspace=COMET_WORKSPACE_NAME,
+    #        model_name=COMET_MODEL_NAME,
+    #    )
 
-<<<<<<< HEAD
-    # Load the pre-trained model
-    model = YOLO('yolov8n.yaml').load('yolov8n.pt')
-    # Train the model
-    model.train(
-        data=yaml_path,
-        epochs=NUM_EPOCHS,
-        imgsz=img_size,
-        save=True,
-        name="yolov8_custom",
-        verbose=verbose
-=======
-        # Get production model weights
-        model_versions = models.find_versions(status="Production")
-        latest_production_weights = model_versions[0]
+    #    # Get production model weights
+    #    model_versions = models.find_versions(status="Production")
+    #    latest_production_weights = model_versions[0]
 
-        # Preparing local path for weights
-        weights_path = os.path.join(LOCAL_DATA_PATH, "weights")
-        os.makedirs(weights_path, exist_ok=True)
+    #    # Preparing local path for weights
+    #    weights_path = os.path.join(LOCAL_DATA_PATH, "weights")
+    #    os.makedirs(weights_path, exist_ok=True)
 
-        # Downloading the weights
-        models.download(
-            version=latest_production_weights,
-            output_folder=weights_path,
-            expand=True,
-        )
+    #    # Downloading the weights
+    #    models.download(
+    #        version=latest_production_weights,
+    #        output_folder=weights_path,
+    #        expand=True,
+    #    )
 
-        # Load the model with the downloaded weights
-        model = YOLO(os.path.join(weights_path, "best.pt"))
-        model.train(resume=True)
-        print(":white_check_mark: Loaded weights from the comet ML")
+    #    # Load the model with the downloaded weights
+    #    model = YOLO(os.path.join(weights_path, "best.pt"))
+    #    model.train(resume=True)
+    #    print(":white_check_mark: Loaded weights from the comet ML")
 
     # If loading pretrained weights fails, initialize a new model
-    except Exception as error:
-        print(f":x: Could not load weights: {error}")
+    #except Exception as error:
+       # print(f":x: Could not load weights: {error}")
 
         # Initialize a new YOLO model with default weights
-        model = YOLO("yolov8n.pt")
-        model.train(
-            data=os.path.join(LOCAL_DATA_PATH, "data.yaml"),
-            epochs=epochs,
-            imgsz=img_size,
-            patience=20,
-        )
+    model = YOLO('yolov8n.yaml').load('yolov8n.pt')
+    model.train(
+        data=os.path.join(LOCAL_DATA_PATH,"data.yaml"), #data=os.path.join(LOCAL_DATA_PATH,'augmented_data',"data.yaml"),
+        epochs=epochs,
+        imgsz=img_size,
+
+    )
 
     # Save the trained model weights to Comet ML
     experiments = api.get(
         workspace=COMET_WORKSPACE_NAME, project_name=COMET_PROJECT_NAME
->>>>>>> f425289b4762e60603d7259af00a20a70b58ad74
     )
 
     # Registering the latest experiment and model
@@ -108,4 +89,4 @@ def train_model(epochs: int = 10, img_size: int = 512):
 
 # Main execution
 if __name__ == "__main__":
-    train_model(epochs=NUM_EPOCHS)
+    train_model(NUM_EPOCHS)
