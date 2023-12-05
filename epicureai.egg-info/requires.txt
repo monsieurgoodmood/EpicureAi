@@ -1,3 +1,0 @@
-openai
-ultralytics
-comet_ml

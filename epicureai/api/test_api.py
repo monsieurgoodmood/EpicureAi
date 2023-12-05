@@ -2,7 +2,7 @@ import requests
 import random
 from pathlib import Path
 import json
-from recipes_chatgpt import generate_recipe, mock_yolo_model  # Ajout de l'importation
+from recipes_chatgpt import generate_recipe, yolo_predict  # Ajout de l'importation
 
 url = "http://localhost:8000/upload_image"
 # Chemin vers l'image
@@ -49,7 +49,7 @@ if response.status_code == 200:
             print("No valid recipe found in the response.")
 
         # Tester directement la fonction generate_recipe
-        ingredients = mock_yolo_model(None)  # Adaptez cette partie selon votre logique réelle de détection d'ingrédients
+        ingredients = yolo_predict(None)  # Adaptez cette partie selon votre logique réelle de détection d'ingrédients
         direct_recipe = generate_recipe(ingredients, diet, allergies, intolerances, time_available_in_minutes, kitchen_equipment)
 
         # Afficher le contenu de la recette générée
