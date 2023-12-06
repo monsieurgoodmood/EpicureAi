@@ -7,7 +7,7 @@ from epicureai.ml_logic.predict import yolo_predict_ingedients
 
 url = "http://localhost:8000/upload_image"
 # Chemin vers l'image
-image_path = Path("/Users/arthurchoisnet/code/monsieurgoodmood/EpicureAi/epicureai/app/uploaded_image_predict.jpeg")
+image_path = Path("/Users/arthurchoisnet/code/monsieurgoodmood/EpicureAi/epicureai/app/images/uploaded_image.jpg")
 
 # Listes des valeurs possibles pour chaque paramètre
 diets = ["vegetarian", "vegan", "gluten-free", None]
