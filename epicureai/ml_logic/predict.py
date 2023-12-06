@@ -1,7 +1,6 @@
 from ultralytics import YOLO
 from epicureai.params import *
 import os
-import cv2
 
 #uploaded_image = os.path.join(os.getcwd(),'epicureai','app','images','uploaded_image.jpg')
 

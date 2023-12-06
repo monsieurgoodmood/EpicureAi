@@ -2,8 +2,6 @@ import requests
 import random
 from pathlib import Path
 import json
-from recipes_chatgpt import generate_recipe
-from epicureai.ml_logic.predict import yolo_predict_ingedients
 
 url = "http://localhost:8000/upload_image"
 # Chemin vers l'image

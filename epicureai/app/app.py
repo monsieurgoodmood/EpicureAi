@@ -2,11 +2,8 @@
 import streamlit as st
 import os
 from style import load_styles
-from element import create_file_uploader, create_diet_selector, create_multiselect, create_time_slider, create_api_request
 from PIL import Image, ImageDraw, ImageFont
 import pandas as pd
-from epicureai.api.recipes_chatgpt import generate_recipe
-from epicureai.ml_logic.predict import yolo_predict_ingedients
 from epicureai.params import *
 import requests
 # Configuration de la page et chargement des styles CSS

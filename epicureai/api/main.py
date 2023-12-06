@@ -2,10 +2,8 @@ from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.responses import JSONResponse
 from starlette.middleware.cors import CORSMiddleware
 import cv2
-import uvicorn
 import numpy as np
 from typing import Optional
-import os
 import traceback
 
 # Importer les fonctions depuis recipes_chatgpt
