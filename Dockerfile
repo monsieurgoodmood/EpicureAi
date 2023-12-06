@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM python:3.10-buster
 
 # Mettre à jour la liste des packages et installer les dépendances requises pour OpenCV
 RUN apt-get update && apt-get install -y libgl1-mesa-glx
@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y libgl1-mesa-glx
 WORKDIR /app
 
 # Copier les fichiers requirements.txt dans le répertoire de travail
-COPY requirements.txt .
+COPY requirements.txt requirements.txt
 
 # Installer les dépendances
 RUN pip install --no-cache-dir -r requirements.txt
