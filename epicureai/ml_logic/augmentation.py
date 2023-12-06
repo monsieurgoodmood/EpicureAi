@@ -119,6 +119,7 @@ def apply_random_transformation(image, annotations, transformation_type):
         transformed_image = rotate_image(image, angle)
         transformed_annotations = adjust_annotations_for_rotation(annotations, image.shape[1], image.shape[0], angle)
     elif transformation_type == 'background':
+
         for _ in range(10):  # Generate 10 different backgrounds
             background_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
             transformed_image = replace_background(image, annotations, background_color)
@@ -184,7 +185,7 @@ transformations_dict = {
     'flip': transformations_per_image // 4,
     'brightness': transformations_per_image // 4,
     'rotate': transformations_per_image // 4,
-    'background': 10  # Ajouter 10 variations d'arrière-plan pour chaque image
+    #'background': 10  # Ajouter 10 variations d'arrière-plan pour chaque image
 }
 
 def augmentation_training_set():

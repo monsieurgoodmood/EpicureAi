@@ -36,19 +36,21 @@ def train_model(epochs: int = 10, img_size: int = 512):
 
        # Load the model with the downloaded weights
        model = YOLO(os.path.join(weights_path, "best.pt"))
-       model.train(resume=True)
        print(":white_check_mark: Loaded weights from the comet ML")
 
     # If loading pretrained weights fails, initialize a new model
     except Exception as error:
-       print(f":x: Could not load weights: {error}")
+        print(f":x: Could not load weights: {error}")
 
         # Initialize a new YOLO model with default weights
-    model = YOLO('yolov8n.yaml').load('yolov8n.pt')
+        model = YOLO('yolov8n.yaml').load('yolov8n.pt')
+
+
     model.train(
-        data=os.path.join(LOCAL_DATA_PATH,"data.yaml"), #data=os.path.join(LOCAL_DATA_PATH,'augmented_data',"data.yaml"),
+        data=os.path.join(LOCAL_DATA_PATH,'augmented_data',"data.yaml"), #data=os.path.join(LOCAL_DATA_PATH,"data.yaml"), #
         epochs=epochs,
         imgsz=img_size,
+
 
     )
 
