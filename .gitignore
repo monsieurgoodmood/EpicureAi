@@ -5,3 +5,5 @@ EpicureAi-6/
 EpicureAo-12/
 augmented_data/
 __pycache__/
+test_pictures
+predict_copy.py
