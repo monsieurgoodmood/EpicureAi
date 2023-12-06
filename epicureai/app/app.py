@@ -6,6 +6,7 @@ from PIL import Image, ImageDraw, ImageFont
 import pandas as pd
 from epicureai.params import *
 import requests
+
 # Configuration de la page et chargement des styles CSS
 st.set_page_config(page_title="Epicure AI", layout="wide")
 st.markdown(load_styles(), unsafe_allow_html=True)
