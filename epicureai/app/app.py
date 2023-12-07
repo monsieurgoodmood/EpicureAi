@@ -1,14 +1,18 @@
 # app.py
 import streamlit as st
-import os
-from style import load_styles
 from PIL import Image, ImageDraw, ImageFont
-import pandas as pd
 import requests
+import time
 
 # Configuration de la page et chargement des styles CSS
 st.set_page_config(page_title="Epicure AI", layout="wide")
-st.markdown(load_styles(), unsafe_allow_html=True)
+
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+# Chargez votre CSS personnalisé
+local_css("epicureai/app/style.css")
 
 # URL de l'API FastAPI
 api_url = "https://epicureai-uky2zwgmvq-no.a.run.app"
@@ -66,6 +70,17 @@ def draw_yolo_annotations(image, annotations):
 
 
 if uploaded_image is not None:
+    messages = [
+        "Cooking magic in progress...",
+        "Scanning your ingredients...",
+        "Whipping up culinary insights...",
+        "Decoding flavors...",
+        "Savor the AI expertise...",
+        "Gourmet discoveries loading...",
+        "Unveiling your food's secrets...",
+        "Get ready to be amazed..."
+    ]
+
     # Diviser l'écran en deux colonnes
     col1, col2 = st.columns(2)
 
@@ -78,16 +93,27 @@ if uploaded_image is not None:
     # Colonne de droite : Image avec annotations
     with col2:
         st.markdown('#### Detection by model')
+        message_placeholder = st.empty()
+
+        with st.spinner("Cooking in progress..."):
+            for i, message in enumerate(messages):
+                message_placeholder.text(message)
+                time.sleep(5)
+
         img_bytes = uploaded_image.getvalue()
         response = requests.post(api_url + "/upload_image", files={'file': img_bytes})
         response_json = response.json()
 
         # Vérifier si 'annotations' est présent dans la réponse
         if 'annotations' in response_json:
+            message_placeholder.empty()  # Efface le message
+            st.balloons()
             annotated_image = draw_yolo_annotations(original_image.copy(), response_json['annotations'])
             st.image(annotated_image, caption="Ingredients detected", use_column_width=True)
         else:
             st.write("No annotations found")
+
+    message_placeholder.empty()
 
     # En dessous des images : Afficher la recette
     if 'recipe' in response_json:

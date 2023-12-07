@@ -1,0 +1,13 @@
+/* Style personnalisé pour le spinner de Streamlit */
+div.stSpinner {
+  display: flex;
+  justify-content: center;
+}
+
+div.stSpinner > div {
+  width: 200px; /* Largeur du spinner */
+  height: 200px; /* Hauteur du spinner */
+  border-width: 20px; /* Épaisseur des bords du spinner */
+}
+
+/* Vous pouvez ajouter d'autres styles personnalisés ici si nécessaire */
