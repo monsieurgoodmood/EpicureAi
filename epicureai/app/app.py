@@ -4,7 +4,6 @@ import os
 from style import load_styles
 from PIL import Image, ImageDraw, ImageFont
 import pandas as pd
-from epicureai.params import *
 import requests
 
 # Configuration de la page et chargement des styles CSS
