@@ -16,6 +16,6 @@ RUN pip install .
 
 # Copier l'ensemble du dossier du projet dans le conteneur
 COPY epicureai epicureai/
-COPY best-153.pt /home/.epicureai_data/models/best-113.pt
+COPY best-117.pt /home/.epicureai_data/models/best-113.pt
 
 CMD uvicorn epicureai.api.main:app --host 0.0.0.0 --port $PORT
