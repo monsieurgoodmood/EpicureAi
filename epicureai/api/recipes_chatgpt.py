@@ -1,6 +1,5 @@
 import openai
 from epicureai.params import OPENAI_KEY
-from epicureai.ml_logic.predict import yolo_predict_ingedients
 
 
 def generate_recipe(ingredients, diet, allergies, intolerances, time_available_in_minutes, kitchen_equipment):
