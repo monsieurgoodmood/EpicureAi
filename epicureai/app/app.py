@@ -12,7 +12,7 @@ st.set_page_config(page_title="Epicure AI", layout="wide")
 st.markdown(load_styles(), unsafe_allow_html=True)
 
 # URL de l'API FastAPI
-api_url = "http://127.0.0.1:8000"
+api_url = "https://epicureai-uky2zwgmvq-no.a.run.app"
 
 ### START OF UI HERE ###
 st.title("Epicure AI")
