@@ -7,13 +7,6 @@ import time
 # Configuration de la page et chargement des styles CSS
 st.set_page_config(page_title="Epicure AI", layout="wide")
 
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
-# Chargez votre CSS personnalisé
-local_css("epicureai/app/style.css")
-
 # URL de l'API FastAPI
 api_url = "https://epicureai-uky2zwgmvq-no.a.run.app"
 
