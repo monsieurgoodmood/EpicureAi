@@ -7,4 +7,4 @@ augmented_data/
 __pycache__/
 test_pictures
 predict_copy.py
-env.yaml
+.env.yaml

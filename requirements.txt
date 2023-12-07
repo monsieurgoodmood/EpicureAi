@@ -11,4 +11,3 @@ streamlit
 roboflow
 pyyaml
 ipykernel
-subprocess
