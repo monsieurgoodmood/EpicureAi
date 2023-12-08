@@ -9,7 +9,7 @@ import os
 #pqath = os.path.join(LOCAL_DATA_PATH,'models', 'best-113.pt')
 
 def yolo_predict_ingedients(uploaded_image):
-    best_model = os.path.join(MODEL_PATH, 'best-117.pt')
+    best_model = os.path.join(MODEL_PATH, 'best-113.pt')
     model = YOLO(best_model)
     results = model.predict(uploaded_image, save=True, conf=0.4, imgsz=512)
 
